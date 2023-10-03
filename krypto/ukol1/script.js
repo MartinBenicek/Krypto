@@ -67,3 +67,10 @@ function encrypt(){
     console.log(finalEncryption)
     document.getElementById("vystup").value = finalEncryption.join("");
 }
+
+/* vstup do encryptu
+odstranit ?
+zpatky bez diakrit 
+qxw pro mezeru
+potom zašifrovat qwx
+*/
