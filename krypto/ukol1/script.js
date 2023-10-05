@@ -16,25 +16,6 @@ const czech_alphabet = {
     "Ž" : "Z",
     " " : "QXW",
     "Ý" : "Y",
-    "?" : " ",
-    "!" : " ",
-    "(" : " ",
-    ")" : " ",
-    "'" : " ",
-    "." : " ",
-    "," : " ",
-    "-" : " ",
-    "/" : " ",
-    ":" : " ",
-    ">" : " ",
-    "<" : " ",
-    "§" : " ",
-    "_" : " ",
-    "*" : " ",
-    "$" : " ",
-    "ß" : " ",
-    "÷" : " ",
-    "×" : " ",
     "0" : "XXXX",
     "1" : "XXXQ",
     "2" : "XXQQ",
@@ -58,6 +39,13 @@ function filtration(text){
         let character = filteredText[i];
         if (czech_alphabet[character]) {
             filteredText[i] = czech_alphabet[character];
+        } else if(alphabet[character]){
+            continue;
+        } else if(filteredText[i] === "A" || filteredText[i] === "Z"){
+            continue;
+        } else{
+            console.log(filteredText)
+            filteredText[i] = " ";
         }
     }
     filteredText = filteredText.join("").replace(/ /g,'');
