@@ -5,13 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kryptologie 1</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    text<input type="text" id="to-encrypt">
-    a:<input type="text" class="key">
-    b:<input type="text" class="key">
-    vystup: <output id="vystup"></output>
-    <button id="encrypt" onclick="encrypt()">zašifrovat</button>
+    <div id="header">
+        <h1>Afinní šifra</h1>
+        <h3>Martin Beníček</h3>
+    </div>
+    <div id="main">
+        <div id="encrypt-text">
+            <h3>Zašifrovat text</h3>
+            <div class="style-items">
+                <p>Zadejte text na šifrování:</p>
+                <input type="text" id="to-encrypt">
+            </div>
+            <div class="style-items">
+                <p>Zadejte klíč A:</p>
+                <input type="text" class="key">
+                <p class="warning">Klíč A musí být nesoudělný s číslem 26!</p>
+            </div>
+            <div class="style-items">
+                <p>Zadejte klíč B:</p>
+                <input type="text" class="key">
+            </div>
+            <div class="style-items">
+                <p>Text po filtraci:</p>
+                <output class="filtr"></output>
+            </div>
+            <div class="style-items bold">
+                <p>Výstup:</p><output class="output"></output>
+            </div>
+            <div class="style-items style-items-button">
+                <button class="button" onclick="encrypt()">Zašifrovat</button>
+            </div>
+        </div>
+        
+        <div id="decrypt-text">
+            <h3>Rozšifrovat text</h3>
+            <div class="style-items">
+                <p>Zadejte text na dešifrování:</p>
+                <input type="text" id="to-decrypt">
+            </div>
+            <div class="style-items">
+                <p>Zadejte klíč A:</p>
+                <input type="text" class="key">
+                <p class="warning">Klíč A musí být nesoudělný s číslem 26!</p>
+            </div>
+            <div class="style-items">
+                <p>Zadejte klíč B:</p>
+                <input type="text" class="key">
+            </div>
+            <div class="style-items">
+                <p>Text po filtraci:</p>
+                <output class="filtr"></output>
+            </div>
+            <div class="style-items bold">
+                <p>Výstup:</p><output class="output"></output>
+            </div>
+            <div class="style-items style-items-button">
+                <button class="button" onclick="decrypt()">Dešifrovat</button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
