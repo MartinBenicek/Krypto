@@ -85,7 +85,7 @@ body{
     background: linear-gradient(90deg, rgba(252, 252, 103, 0.945) 0%, rgba(35, 255, 71, 0.658) 70%);
 }
 
-.filtr, .output{
+.filtr, .output, .abeceda{
     margin-left: 10px;
     font-family: 'Karla';
     inline-size: 550px;

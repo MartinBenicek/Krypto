@@ -72,23 +72,34 @@ function getLetter(dict, number){
 function encrypt(){
     const textToEncrypt = document.getElementById("to-encrypt").value.toUpperCase();
     const keys = document.getElementsByClassName("key");
+    let alphabetToLog = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     document.getElementsByClassName("warning")[0].style.display = "none";
     document.getElementsByClassName("filtr")[0].value = "";
     document.getElementsByClassName("output")[0].value = "";
+    document.getElementsByClassName("abeceda")[0].value = "";
+    document.getElementsByClassName("abeceda")[1].value = "";
     if(gcd(parseInt(keys[0].value), 26) != 1){
         document.getElementsByClassName("warning")[0].style.display = "block";
         return;
     }
+    document.getElementsByClassName("abeceda")[0].value = alphabetToLog;
     let filteredText = filtration(textToEncrypt);
     document.getElementsByClassName("filtr")[0].value = filteredText;
     let textIndex = convert(filteredText);
+    let textIndex2 = convert(alphabetToLog);
     let newArray = [];
+    let newArray2 = [];
+    for (let i = 0; i < alphabetToLog.length; i++){
+        newArray2[i] = ((parseInt(keys[0].value) * textIndex2[i] + parseInt(keys[1].value)) % 26);
+    }
     for (let i = 0; i < textIndex.length; i++) {
         newArray.push((parseInt(keys[0].value) * textIndex[i] + parseInt(keys[1].value)) % 26);
         if((i + 1) % 5 === 0){
             newArray.push(" ");
         }
     }
+    let translation = newArray2.map(value => getLetter(alphabet, value));
+    document.getElementsByClassName("abeceda")[1].value = translation.join("");
     let finalEncryption = newArray.map(value => getLetter(alphabet, value));
     document.getElementsByClassName("output")[0].value = finalEncryption.join("");
 }
@@ -148,19 +159,28 @@ function decryptNumbers(arrayNumbers){
 function decrypt(){
     const textToDecrypt = document.getElementById("to-decrypt").value.toUpperCase();
     const keys = document.getElementsByClassName("key");
+    let alphabetToLog = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     document.getElementsByClassName("warning")[1].style.display = "none";
     document.getElementsByClassName("filtr")[1].value = "";
     document.getElementsByClassName("output")[1].value = "";
+    document.getElementsByClassName("abeceda")[2].value = "";
+    document.getElementsByClassName("abeceda")[3].value = "";
     if(gcd(parseInt(keys[2].value), 26) != 1){
         document.getElementsByClassName("warning")[1].style.display = "block";
         return;
     }
+    document.getElementsByClassName("abeceda")[2].value = alphabetToLog;
     let deleteSpace = textToDecrypt.split(" ");
     deleteSpace = deleteSpace.join("");
     let filteredText = filtration(deleteSpace);
     document.getElementsByClassName("filtr")[1].value = filteredText;
     let textIndex = convert(filteredText);
+    let textIndex2 = convert(alphabetToLog);
     let newArray = [];
+    let newArray2 = [];
+    for (let i = 0; i < alphabetToLog.length; i++){
+        newArray2[i] = ((parseInt(keys[2].value) * textIndex2[i] + parseInt(keys[3].value)) % 26);
+    }
     let inverseAkey = modInverse(keys[2].value, 26);
     console.log(textIndex);
     for (let i = 0; i < textIndex.length; i++) {
@@ -170,9 +190,9 @@ function decrypt(){
         }
         newArray[i] = decryptedLetter;
     }
-    console.log(newArray);
+    let translation = newArray2.map(value => getLetter(alphabet, value));
+    document.getElementsByClassName("abeceda")[3].value = translation.join("");
     let finalDecryption = newArray.map(value => getLetter(alphabet, value));
-    console.log(finalDecryption);
     let removeSpace = decryptSpace(finalDecryption);
     let decryptNumber = decryptNumbers(removeSpace);
     document.getElementsByClassName("output")[1].value = decryptNumber.join("");
