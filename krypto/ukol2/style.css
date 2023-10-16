@@ -15,8 +15,32 @@ body{
     flex-direction: column;
 }
 
-#input-key{
+.text-zone{
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input, .output{
+    display: flex;
+    align-items: center;
+}
+
+#text-to-encrypt, #encryption-key{
+    height: 30px;
+    width: 450px;
+    margin-left: 10px;
+    font-family: 'Karla';
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+#encrypt-button{
+    height: 40px;
+    width: 200px;
+    font-size: 18px;
+    border-radius: 30px;
+    font-family: 'Karla';
 }
 
 #table{
@@ -24,15 +48,25 @@ body{
     flex-direction: column;
     background: rgba(255, 255, 255, 0.575);
     border-radius: 8px;
+    margin-top: 20px;
+    width: 500px;
+    height: 500px;
+    justify-content: space-evenly;
 }
 
 .row{
     display: flex;
+    justify-content: space-evenly;
 }
 
 .square{
-    margin: 10px;
-    padding: 10px;
+    padding: 20px;
+    margin: auto;
+    font-size: 22px;
     background: rgba(255, 255, 255, 0.507);
     border-radius: 8px;
+}
+
+#encrypted-text{
+    margin-left: 10px;
 }

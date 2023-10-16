@@ -9,96 +9,107 @@
 </head>
 <body>
     <div id="main">
-        <div id="input-key">
-            <p>Zadejte šifru:</p>
-            <input type="text">
+        <div class="text-zone">
+            <div class="input">
+                <p>Zašifrovat text:</p>
+                <input type="text" id="text-to-encrypt">
+            </div>
+            <div class="input">
+                <p>Textový klíč:</p>
+                <input type="text" id="encryption-key">
+            </div>
+            <button id="encrypt-button" onclick="encrypt()">zašifrovat</button>
         </div>
         <div id="table">
             <div class="row">
                 <div class="square">
-                    a
+                    <output class="output-square"></output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
             </div>
             <div class="row">
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
             </div>
             <div class="row">
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
             </div>
             <div class="row">
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
             </div>
             <div class="row">
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
                 <div class="square">
-                    a
+                    <output class="output-square">a</output>
                 </div>
-            </div>
+            </div>  
+        </div>
+        <div class="output">
+            <p>Zašifrovaný text:</p>
+            <output id="encrypted-text">a</output>
         </div>
     </div>
     <script src="script.js"></script>
