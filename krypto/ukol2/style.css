@@ -1,0 +1,38 @@
+body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Karla';
+    font-size: 18px;
+    background: linear-gradient(90deg, rgba(252, 252, 103, 0.945) 0%, rgba(35, 255, 71, 0.658) 70%);
+}
+
+#main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#input-key{
+    display: flex;
+}
+
+#table{
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.575);
+    border-radius: 8px;
+}
+
+.row{
+    display: flex;
+}
+
+.square{
+    margin: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.507);
+    border-radius: 8px;
+}
