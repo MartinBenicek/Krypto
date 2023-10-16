@@ -23,20 +23,26 @@ for (let i = 0; i < 26; i++) {
     alphabet[i] = letter;
 }
 
+alphabet.splice(alphabet.indexOf("Q"), 1);
+
 function encryptionKey(text){
     let text_array = text.split("");
     let newArray = []
     const outputSquares = document.getElementsByClassName("output-square");
     for(let i = 0; i < text_array.length; i++){
         if(newArray.includes(text_array[i]) === false){
-            newArray.push(text_array[i])
+            newArray.push(text_array[i]);
         }
     }
-    for(let i = 0; i < alphabet.length - 1; i++){
-        if (i < newArray.length){
+    for(let i = 0; i < newArray.length; i++){
+        outputSquares[i].value = newArray[i];
+    }
+    for(let i = newArray.length - 1; i < alphabet.length; i++){
+        if (newArray.includes(alphabet[i]) === false){
             outputSquares[i].value = newArray[i];
-        } else{
-            outputSquares[i].value = alphabet[i];
+        }
+        else{
+            i--
         }
     }
 }
