@@ -8,6 +8,18 @@ body{
     background: linear-gradient(90deg, rgba(252, 252, 103, 0.945) 0%, rgba(35, 255, 71, 0.658) 70%);
 }
 
+#header{
+    text-align: center;
+}
+
+#header h1, #header h3{
+    margin: 10px;
+}
+
+#language-choice p{
+    margin-top: 5px;
+}
+
 #main{
     display: flex;
     align-items: center;
@@ -24,6 +36,46 @@ body{
 .input, .output{
     display: flex;
     align-items: center;
+}
+
+#language-choice{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#language-background{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: white;
+    border: solid 2px rgb(0, 0, 0);
+    border-radius: 8px;
+}
+
+.language{
+    border: none;
+    background-color: transparent;
+    height: 45px;
+    width: 34px;
+    font-size: 18px;
+    padding: 0;
+    font-family: 'Karla';
+}
+
+.language:nth-child(1):focus{
+    background-color: green;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 6px;
+}
+
+.language:nth-child(3):focus{
+    background-color: red;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+#half-border{
+    border: solid 1px rgb(0, 0, 0);
 }
 
 #text-to-encrypt, #encryption-key{

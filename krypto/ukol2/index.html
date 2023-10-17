@@ -8,8 +8,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="header">
+        <h1>Playfair šifra</h1>
+        <h3>Martin Beníček</h3>
+    </div>
     <div id="main">
         <div class="text-zone">
+            <div id="language-choice">
+                <p>Vyberte jazyk</p>
+                <div id="language-background">
+                    <button class="language" onclick="">EN</button>
+                    <span id="half-border"></span>
+                    <button class="language">CZ</button>
+                </div>
+            </div>
             <div class="input">
                 <p>Zašifrovat text:</p>
                 <input type="text" id="text-to-encrypt">
@@ -18,7 +30,12 @@
                 <p>Textový klíč:</p>
                 <input type="text" id="encryption-key">
             </div>
-            <button id="encrypt-button" onclick="encrypt()">zašifrovat</button>
+            <p>Text po filtraci:</p>
+            <div class="output">
+                <p>Zašifrovaný text:</p>
+                <output id="encrypted-text">a</output>
+            </div>
+            <button id="encrypt-button" onclick="encrypt()">Zašifrovat</button>
         </div>
         <div id="table">
             <div class="row">
@@ -106,10 +123,6 @@
                     <output class="output-square">a</output>
                 </div>
             </div>  
-        </div>
-        <div class="output">
-            <p>Zašifrovaný text:</p>
-            <output id="encrypted-text">a</output>
         </div>
     </div>
     <script src="script.js"></script>
