@@ -13,29 +13,59 @@
         <h3>Martin Beníček</h3>
     </div>
     <div id="main">
-        <div class="text-zone">
-            <div id="language-choice">
-                <p>Vyberte jazyk</p>
-                <div id="language-background">
-                    <button class="language" onclick="">EN</button>
-                    <span id="half-border"></span>
-                    <button class="language">CZ</button>
+        <div id="language-choice">
+            <p>Vyberte jazyk</p>
+            <div id="language-background">
+                <button class="language">EN</button>
+                <span id="half-border"></span>
+                <button class="language">CZ</button>
+            </div>
+        </div>
+        <div id="inputs">
+            <div class="text-zone">
+                <h3 class="bold">Zašifrovat text</h3>
+                <div class="input">
+                    <p>Zadejte text na šifrování:</p>
+                    <input type="text" id="text-to-encrypt">
+                </div>
+                <div class="input">
+                    <p>Zadejte textový klíč:</p>
+                    <input type="text" id="encryption-key">
+                </div>
+                <div class="output">
+                    <p>Text po filtraci:</p>
+                    <output class="filtered-text"></output>
+                </div>
+                <div class="output">
+                    <p>Zašifrovaný text:</p>
+                    <output id="encrypted-text"></output>
+                </div>
+                <div class="output style-button">
+                    <button id="encrypt-button" onclick="encrypt()">Zašifrovat</button>
                 </div>
             </div>
-            <div class="input">
-                <p>Zašifrovat text:</p>
-                <input type="text" id="text-to-encrypt">
+            <div class="text-zone">
+                <h3 class="bold">Rozšifrovat text</h3>
+                <div class="input">
+                    <p>Zadejte text na rozšifrování:</p>
+                    <input type="text" id="text-to-decrypt">
+                </div>
+                <div class="input">
+                    <p>Zadejte textový klíč:</p>
+                    <input type="text" id="decryption-key">
+                </div>
+                <div class="output">
+                    <p>Text po filtraci:</p>
+                    <output class="filtered-text"></output>
+                </div>
+                <div class="output">
+                    <p>Rozšifrovaný text:</p>
+                    <output id="decrypted-text"></output>
+                </div>
+                <div class="output style-button">
+                    <button id="decrypt-button" onclick="decrypt()">Zašifrovat</button>
+                </div>
             </div>
-            <div class="input">
-                <p>Textový klíč:</p>
-                <input type="text" id="encryption-key">
-            </div>
-            <p>Text po filtraci:</p>
-            <div class="output">
-                <p>Zašifrovaný text:</p>
-                <output id="encrypted-text">a</output>
-            </div>
-            <button id="encrypt-button" onclick="encrypt()">Zašifrovat</button>
         </div>
         <div id="table">
             <div class="row">
