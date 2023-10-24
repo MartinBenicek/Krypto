@@ -23,7 +23,7 @@ const numbers = {
     "0" : "XXXX",
     "1" : "XXXQ",
     "2" : "XXQQ",
-    "3" : "XQQQ",
+    "3" : "XYQQ",
     "4" : "QQQQ",
     "5" : "XQQX",
     "6" : "QQQW",
@@ -277,18 +277,20 @@ function changeDe(text){
         character = "Q";
     }
     for(let i = 0; i < text.length; i++){
-        if(text[i] === "X" && text[i+1] === "W" && text[i+2] === "X" && text[i+3] === "W" && text[i+4] === "X" && text[i+5] === "W" && text[i+6] === "X"){
+        if(text[i] === "X" && text[i+1] === " " || text[i+1] == null){
+            text.splice(i, 2, "");
+        } else if(text[i] === "X" && text[i+1] === "W" && text[i+2] === "X" && text[i+3] === "W" && text[i+4] === "X" && text[i+5] === "W" && text[i+6] === "X"){
             text.splice(i, 7, "0");
         } else if(text[i] === "X" && text[i+1] === "W" && text[i+2] === "X" && text[i+3] === "W" && text[i+4] === "X"){
             text.splice(i, 6, "1");
         } else if(text[i] === "X" && text[i+1] === "W" && text[i+2] === "X" && text[i+3] === character && text[i+2] === "X" && text[i+3] === character){
             text.splice(i, 6, "2");
-        } else if(text[i] === "X" && text[i+1] === character && text[i+2] === "X" && text[i+3] === character && text[i+4] === "X" && text[i+5] === character){
+        } else if(text[i] === "X" && text[i+1] === "Y" && text[i+2] === character && text[i+3] === "X" && text[i+4] === character){
             text.splice(i, 6, "3");
         } else if(text[i] === character && text[i+1] === "X" && text[i+2] === character && text[i+3] === "X" && text[i+4] === character && text[i+5] === "X" && text[i+6] === character){
             text.splice(i, 7, "4");
         } else if(text[i] === "X" && text[i+1] === character && text[i+2] === "X" && text[i+3] === character && text[i+4] === "X"){
-            text.splice(i, 6, "5");
+            text.splice(i, 5, "5");
         } else if(text[i] === character && text[i+1] === "X" && text[i+2] === character && text[i+3] === "X" && text[i+4] === character && text[i+5] === "W"){
             text.splice(i, 6, "6");
         } else if(text[i] === character && text[i+1] === "X" && text[i+2] === character && text[i+3] === "W" && text[i+4] === "X" && text[i+5] === "W"){
