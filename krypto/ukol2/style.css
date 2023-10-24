@@ -86,7 +86,8 @@ body{
     font-family: 'Karla';
 }
 
-.language:nth-child(1):focus{
+.language:nth-child(1){
+    background-color: rgb(176, 250, 3);
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
 }

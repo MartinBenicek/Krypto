@@ -30,7 +30,7 @@ const numbers = {
     "7" : "QQWW",
     "8" : "QWWW",
     "9" : "WWWW",
-    " " : "QXW",
+    " " : "QXXW",
 }
 
 for (let i = 0; i < 26; i++) {
@@ -38,11 +38,20 @@ for (let i = 0; i < 26; i++) {
     alphabet[i] = letter;
 }
 alphabet.splice(alphabet.indexOf("Q"), 1);
+let missingchar = true;
 
 const buttons = document.getElementsByClassName("language");
 buttons[0].addEventListener("click", () =>{
+    for (let i = 0; i < 26; i++) {
+        const letter = String.fromCharCode(65 + i);
+        alphabet[i] = letter;
+    }
+    alphabet.splice(alphabet.indexOf("Q"), 1);
     czech_alphabet["Q"] = "O";
     delete czech_alphabet["J"];
+    missingchar = true;
+    console.log(alphabet);
+    console.log(czech_alphabet);
     buttons[1].style.backgroundColor = "rgb(" + 255 + ", " + 255 + ", " + 255 + ")";
     buttons[0].style.backgroundColor = "rgb(" + 176 + ", " + 250 + ", " + 3 + ")";
     buttons[0].style.borderTopLeftRadius = "6px";
@@ -52,8 +61,17 @@ buttons[0].addEventListener("click", () =>{
 })
 
 buttons[1].addEventListener("click", () =>{
+    for (let i = 0; i < 26; i++) {
+        const letter = String.fromCharCode(65 + i);
+        alphabet[i] = letter;
+    }
+    alphabet.splice(alphabet.indexOf("J"), 1);
     czech_alphabet["J"] = "I";
     delete czech_alphabet["Q"];
+    missingchar = "I";
+    missingchar = false;
+    console.log(alphabet);
+    console.log(czech_alphabet);
     buttons[0].style.backgroundColor = "rgb(" + 255 + ", " + 255 + ", " + 255 + ")";
     buttons[1].style.backgroundColor = "rgb(" + 176 + ", " + 250 + ", " + 3 + ")";
     buttons[0].style.borderTopLeftRadius = "6px";
@@ -118,7 +136,6 @@ function filtration(text, cond){
         }
     }
     filteredText = filteredText.join("").replace(/ /g,'');
-    console.log(filteredText);
     return filteredText;
 }
 
@@ -240,13 +257,51 @@ function changeLetters(arr, matrix, operator){
                 newArray.push(matrix[letter2[0]][letter1[1]])
         }
     }
-    for (let i = 0; i < newArray.length; i++) {
-        newArray2.push(newArray[i]);
-        if((i + 1) % 5 === 0){
-            newArray2.push(" ");
+    if (operator === "+"){
+        for (let i = 0; i < newArray.length; i++) {
+            newArray2.push(newArray[i]);
+            if((i + 1) % 5 === 0){
+                newArray2.push(" ");
+            }
+        }
+        return newArray2;
+    }
+    return newArray;
+}
+
+function changeDe(text){
+    let character;
+    if (missingchar == true){
+        character = "O";
+    } else{
+        character = "Q";
+    }
+    for(let i = 0; i < text.length; i++){
+        if(text[i] === "X" && text[i+1] === "W" && text[i+2] === "X" && text[i+3] === "W" && text[i+4] === "X" && text[i+5] === "W" && text[i+6] === "X"){
+            text.splice(i, 7, "0");
+        } else if(text[i] === "X" && text[i+1] === "W" && text[i+2] === "X" && text[i+3] === "W" && text[i+4] === "X"){
+            text.splice(i, 6, "1");
+        } else if(text[i] === "X" && text[i+1] === "W" && text[i+2] === "X" && text[i+3] === character && text[i+2] === "X" && text[i+3] === character){
+            text.splice(i, 6, "2");
+        } else if(text[i] === "X" && text[i+1] === character && text[i+2] === "X" && text[i+3] === character && text[i+4] === "X" && text[i+5] === character){
+            text.splice(i, 6, "3");
+        } else if(text[i] === character && text[i+1] === "X" && text[i+2] === character && text[i+3] === "X" && text[i+4] === character && text[i+5] === "X" && text[i+6] === character){
+            text.splice(i, 7, "4");
+        } else if(text[i] === "X" && text[i+1] === character && text[i+2] === "X" && text[i+3] === character && text[i+4] === "X"){
+            text.splice(i, 6, "5");
+        } else if(text[i] === character && text[i+1] === "X" && text[i+2] === character && text[i+3] === "X" && text[i+4] === character && text[i+5] === "W"){
+            text.splice(i, 6, "6");
+        } else if(text[i] === character && text[i+1] === "X" && text[i+2] === character && text[i+3] === "W" && text[i+4] === "X" && text[i+5] === "W"){
+            text.splice(i, 6, "7");
+        } else if(text[i] === character && text[i+1] === "W" && text[i+2] === "X" && text[i+3] === "W" && text[i+4] === "X" && text[i+5] === "W"){
+            text.splice(i, 6, "8");
+        } else if(text[i] === "W" && text[i+1] === "X" && text[i+2] === "W" && text[i+3] === "X" && text[i+4] === "W" && text[i+5] === "X" && text[i+6] === "W"){
+            text.splice(i, 7, "9");
+        } else if(text[i] === character && text[i+1] === "X" && text[i+2] === "W" && text[i+3] === "X" && text[i+4] === "W"){
+            text.splice(i, 5, " ");
         }
     }
-    return newArray2;
+    return text;
 }
 
 function encrypt(){
@@ -254,6 +309,12 @@ function encrypt(){
     const textAsKey = document.getElementById("encryption-key").value.toUpperCase();
     const filteredText = document.getElementsByClassName("filtered-text");
     const printEncryptedText = document.getElementById("encrypted-text");
+    filteredText[0].value = "";
+    if(textAsKey.length < 8){
+        filteredText[0].value = "Heslo musí být delší než 8 znaků";
+        printEncryptedText.value = ""
+        return;
+    }
     let filteredKey = filtrationforKey(textAsKey);
     let filteredEnText = filtration(textToEncrypt, "true");
     let matrix = Table(filteredKey);
@@ -268,21 +329,17 @@ function decrypt(){
     const textAsKey = document.getElementById("decryption-key").value.toUpperCase();
     const filteredText = document.getElementsByClassName("filtered-text");
     const printDecryptedText = document.getElementById("decrypted-text");
+    if(textAsKey.length < 8){
+        filteredText[1].value = "Heslo musí být delší než 8 znaků";
+        printDecryptedText.value = "";
+        return;
+    }
     let filteredKey = filtrationforKey(textAsKey);
     let filteredDeText = filtration(textToDecrypt, "false");
     let matrix = Table(filteredKey);
     let pairedLetters = pairLetters(filteredDeText, "false");
     filteredText[1].value = pairedLetters.join("");
     let decryptedText = changeLetters(pairedLetters, matrix, "-");
-    printDecryptedText.value = decryptedText.join("");
+    let changeDecryptedtext = changeDe(decryptedText);
+    printDecryptedText.value = changeDecryptedtext.join("");
 }
-
-
-/*
-vyplnění tabulky - nechat jak je z textu (done)
-ve filtraci Q -> O? - ano (upravit)
-mezery a čísla taky? - ano (dodělat)
-dešifrování uppercase čísla a mezery (jak u afinní šifry)? - je to tak (dodělat)
-filtrovaný text? - ano (napůl)
-čísla do textového klíče? - na nás -> ne
-*/
