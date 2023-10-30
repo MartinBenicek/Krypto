@@ -5,7 +5,9 @@ body{
     height: 100%;
     font-family: 'Karla';
     font-size: 18px;
-    background: linear-gradient(90deg, rgba(252, 252, 103, 0.945) 0%, rgba(35, 255, 71, 0.658) 70%);
+    background: linear-gradient(270deg, rgba(171,98,221,1) 0%, rgba(255,44,44,1) 50%, rgba(245,173,73,1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 #main{
@@ -23,7 +25,7 @@ body{
     padding: 25px;
     margin: 15px 10px 0px 10px;
     width: 750px;
-    height: 300px;
+    height: fit-content;
 }
 
 .bold{
@@ -64,8 +66,24 @@ body{
 }
 
 .matrix-checkbox:checked{
-    background-color: rgb(61, 231, 61);
-    border: none
+    background-color: rgb(53, 224, 53);
+    border: none;
+}
+
+#encrypt-button{
+    height: 40px;
+    width: 200px;
+    font-size: 18px;
+    border-radius: 30px;
+    font-family: 'Karla';
+}
+
+#encrypt-button:hover{
+    background: linear-gradient(270deg, rgba(171,98,221,1) 0%, rgb(255, 66, 66) 50%, rgba(245,173,73,1) 100%);;
+}
+
+.style-button{
+    justify-content: center;
 }
 
 #text-to-encrypt, #encryption-key, #matrix-key{
@@ -78,6 +96,7 @@ body{
 }
 
 #table{
+    padding: 10px;
     display: flex;
     flex-direction: column;
     background: rgba(255, 255, 255, 0.575);
@@ -85,6 +104,7 @@ body{
     justify-content: space-evenly;
     width: 500px;
     height: 500px;
+    margin-top: 30px;
 }
 
 .row{
@@ -103,4 +123,7 @@ body{
     font-size: 22px;
     background: rgba(255, 255, 255, 0.507);
     border-radius: 8px;
+    width: 15px;
+    height: 26px;
+    text-align: center;
 }

@@ -25,25 +25,30 @@
                     <span class="margin-span">
                         <span class="matrix-span">
                             <p>Náhodné</p>
-                            <input type="checkbox" class="matrix-checkbox" checked onclick="matrixCheckboxclick()">
+                            <input type="checkbox" class="matrix-checkbox" checked>
                         </span>
                         <span class="matrix-span">
                             <p>Ručně zadané</p>
-                            <input type="checkbox" class="matrix-checkbox" onclick="matrixCheckboxclick()">
+                            <input type="checkbox" class="matrix-checkbox">
                         </span>
                     </span>
                 </div>
                 <div class="input">
                     <p>Zadejte vlastní matici:</p>
-                    <input type="text" id="matrix-key">
+                    <input type="text" id="matrix-key" disabled>
+                </div>
+                <div class="output">
+                    <p>Zašifrovaný text:</p>
+                    <output id="encrypted-text"></output>
+                </div>
+                <div class="output style-button">
+                    <button id="encrypt-button" onclick="encrypt()">Zašifrovat</button>
                 </div>
             </div>
         </div>
         <div id="table">
             <div class="row">
-                <div class="nothing-square">
-                    <p></p>
-                </div>
+                <div class="nothing-square"></div>
                 <div class="cipher-square">
                     <output class="cipher-output-square">A</output>
                 </div>
