@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kryptologie 3</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="main">
+        <div id="inputs">
+            <div class="text-zone">
+                <h3 class="bold">Zašifrovat text</h3>
+                <div class="input">
+                    <p>Zadejte text na šifrování:</p>
+                    <input type="text" id="text-to-encrypt">
+                </div>
+                <div class="input">
+                    <p>Zadejte textový klíč:</p>
+                    <input type="text" id="encryption-key">
+                </div>
+                <div class="input">
+                    <p>Hodnoty v matici budou:</p>
+                    <span class="margin-span">
+                        <span class="matrix-span">
+                            <p>Náhodné</p>
+                            <input type="checkbox" class="matrix-checkbox" checked onclick="matrixCheckboxclick()">
+                        </span>
+                        <span class="matrix-span">
+                            <p>Ručně zadané</p>
+                            <input type="checkbox" class="matrix-checkbox" onclick="matrixCheckboxclick()">
+                        </span>
+                    </span>
+                </div>
+                <div class="input">
+                    <p>Zadejte vlastní matici:</p>
+                    <input type="text" id="matrix-key">
+                </div>
+            </div>
+        </div>
+        <div id="table">
+            <div class="row">
+                <div class="nothing-square">
+                    <p></p>
+                </div>
+                <div class="cipher-square">
+                    <output class="cipher-output-square">A</output>
+                </div>
+                <div class="cipher-square">
+                    <output class="cipher-output-square">D</output>
+                </div>
+                <div class="cipher-square">
+                    <output class="cipher-output-square">F</output>
+                </div>
+                <div class="cipher-square">
+                    <output class="cipher-output-square">G</output>
+                </div>
+                <div class="cipher-square">
+                    <output class="cipher-output-square">X</output>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cipher-square">
+                    <output class="cipher-output-square">A</output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cipher-square">
+                    <output class="cipher-output-square">D</output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cipher-square">
+                    <output class="cipher-output-square">F</output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cipher-square">
+                    <output class="cipher-output-square">G</output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cipher-square">
+                    <output class="cipher-output-square">X</output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+                <div class="square">
+                    <output class="output-square"></output>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
