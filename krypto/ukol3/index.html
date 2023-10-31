@@ -8,6 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="header">
+        <h1>ADFG(V)X šifra</h1>
+        <h3>Martin Beníček</h3>
+    </div>
     <div id="main">
         <div id="inputs">
             <div class="text-zone">
@@ -43,6 +47,41 @@
                 </div>
                 <div class="output style-button">
                     <button id="encrypt-button" onclick="encrypt()">Zašifrovat</button>
+                </div>
+            </div>
+            <div class="text-zone">
+                <h3 class="bold">Dešifrovat text</h3>
+                <div class="input">
+                    <p>Zadejte text na rozšifrování:</p>
+                    <input type="text" id="text-to-decrypt">
+                </div>
+                <div class="input">
+                    <p>Zadejte textový klíč:</p>
+                    <input type="text" id="encryption-key">
+                </div>
+                <div class="input">
+                    <p>Hodnoty v matici budou:</p>
+                    <span class="margin-span">
+                        <span class="matrix-span">
+                            <p>Náhodné</p>
+                            <input type="checkbox" class="matrix-checkbox" checked>
+                        </span>
+                        <span class="matrix-span">
+                            <p>Ručně zadané</p>
+                            <input type="checkbox" class="matrix-checkbox">
+                        </span>
+                    </span>
+                </div>
+                <div class="input">
+                    <p>Zadejte vlastní matici:</p>
+                    <input type="text" id="matrix-key" disabled>
+                </div>
+                <div class="output">
+                    <p>Dešifrovaný text:</p>
+                    <output id="decrypted-text"></output>
+                </div>
+                <div class="output style-button">
+                    <button id="decrypt-button" onclick="decrypt()">Dešifrovat</button>
                 </div>
             </div>
         </div>

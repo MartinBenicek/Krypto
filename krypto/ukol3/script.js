@@ -1,19 +1,16 @@
 /*
-přepíání tabulky nebo 2 vedle sebe?
-co zaměňovat? podle verze EN/CZ? (J -> I nebo W -> V.)
-tabulka se chová jak u playfairu?
-vytvořit další tabulku pod kde bude klíč se zašifrovnými dvojicemi?
-dát klíč a ruční matici i pro dešifrování?
-vlastní matice bude slovo a pak random?
-výpis aktuální šifrovací tabulky - co znamená?
-5x5 MUSÍ být bez čísel?
-tip na/jak udělat mezeru?
-heslo v ručně zadané matici minimální počat znaků?
+přepíání tabulky nebo 2 vedle sebe? ne
+co zaměňovat? podle verze EN/CZ? (J -> I nebo W -> V.) ano
+tabulka se chová jak u playfairu? ano
+vytvořit další tabulku pod kde bude klíč se zašifrovnými dvojicemi? ano
+dát klíč a ruční matici i pro dešifrování? nechat
+vlastní matice bude slovo a pak random? ano
+výpis aktuální šifrovací tabulky - co znamená (jak playfair)? druhá tabulka
+heslo v ručně zadané matici minimální počat znaků? -
+5x5 MUSÍ být bez čísel? ano
+zobrazit text po filtraci? ano
+tip na/jak udělat mezeru? afinní/playfair
 
-přepínač pro volbu zadání matice a náhodného generování.  (co bude lepší na vzhledu)
-pro zadání šifrovací matice ručně (spolu s vyřazováním nebo znázorněních zbývajících znaků pro vyplnění),
-
-zobrazit text po filtraci?
 
 pole pro zadání textu pro dešifrování
 výpis zašifrovaného textu (mezeru dlesloupců),

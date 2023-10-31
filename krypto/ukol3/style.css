@@ -10,11 +10,23 @@ body{
     background-attachment: fixed;
 }
 
+#header{
+    text-align: center;
+}
+
+#header h1, #header h3{
+    margin: 10px;
+}
+
 #main{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+#inputs{
+    display: flex;
 }
 
 .text-zone{
@@ -70,7 +82,7 @@ body{
     border: none;
 }
 
-#encrypt-button{
+#encrypt-button, #decrypt-button{
     height: 40px;
     width: 200px;
     font-size: 18px;
@@ -78,7 +90,7 @@ body{
     font-family: 'Karla';
 }
 
-#encrypt-button:hover{
+#encrypt-button:hover, #decrypt-button:hover{
     background: linear-gradient(270deg, rgba(171,98,221,1) 0%, rgb(255, 66, 66) 50%, rgba(245,173,73,1) 100%);;
 }
 
@@ -86,7 +98,7 @@ body{
     justify-content: center;
 }
 
-#text-to-encrypt, #encryption-key, #matrix-key{
+#text-to-encrypt, #encryption-key, #matrix-key, #text-to-decrypt{
     height: 30px;
     width: 450px;
     margin-left: auto;
