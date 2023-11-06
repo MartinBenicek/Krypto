@@ -13,6 +13,24 @@
         <h3>Martin Beníček</h3>
     </div>
     <div id="main">
+        <div id="choices">
+            <div id="language-choice">
+                <h4>Vyberte jazyk</h4>
+                <div class="background">
+                    <button class="language">EN</button>
+                    <span id="half-border"></span>
+                    <button class="language">CZ</button>
+                </div>
+            </div>
+            <div id="versions">
+                <h4>Vyberte verzi šifry</h4>
+                <div class="background">
+                    <button class="version">5x5</button>
+                    <span id="half-border"></span>
+                    <button class="version">6x6</button>
+                </div>
+            </div>
+        </div>
         <div id="inputs">
             <div class="text-zone">
                 <h3 class="bold">Zašifrovat text</h3>
@@ -39,7 +57,11 @@
                 </div>
                 <div class="input">
                     <p>Zadejte vlastní matici:</p>
-                    <input type="text" id="matrix-key" disabled>
+                    <input type="text" class="matrix-key" disabled>
+                </div>
+                <div class="output">
+                    <p>Filtrovaný text:</p>
+                    <output id="filtered-text"></output>
                 </div>
                 <div class="output">
                     <p>Zašifrovaný text:</p>
@@ -57,24 +79,7 @@
                 </div>
                 <div class="input">
                     <p>Zadejte textový klíč:</p>
-                    <input type="text" id="encryption-key">
-                </div>
-                <div class="input">
-                    <p>Hodnoty v matici budou:</p>
-                    <span class="margin-span">
-                        <span class="matrix-span">
-                            <p>Náhodné</p>
-                            <input type="checkbox" class="matrix-checkbox" checked>
-                        </span>
-                        <span class="matrix-span">
-                            <p>Ručně zadané</p>
-                            <input type="checkbox" class="matrix-checkbox">
-                        </span>
-                    </span>
-                </div>
-                <div class="input">
-                    <p>Zadejte vlastní matici:</p>
-                    <input type="text" id="matrix-key" disabled>
+                    <input type="text" id="decryption-key">
                 </div>
                 <div class="output">
                     <p>Dešifrovaný text:</p>
@@ -85,124 +90,128 @@
                 </div>
             </div>
         </div>
-        <div id="table">
-            <div class="row">
-                <div class="nothing-square"></div>
-                <div class="cipher-square">
-                    <output class="cipher-output-square">A</output>
+        <div id="tables">
+            <div id="text-table">
+                <div class="row">
+                    <div class="nothing-square"></div>
+                    <div class="cipher-square">
+                        <output class="cipher-output-square">A</output>
+                    </div>
+                    <div class="cipher-square">
+                        <output class="cipher-output-square">D</output>
+                    </div>
+                    <div class="cipher-square">
+                        <output class="cipher-output-square">F</output>
+                    </div>
+                    <div class="cipher-square">
+                        <output class="cipher-output-square">G</output>
+                    </div>
+                    <div class="cipher-square">
+                        <output class="cipher-output-square">X</output>
+                    </div>
                 </div>
-                <div class="cipher-square">
-                    <output class="cipher-output-square">D</output>
+                <div class="row">
+                    <div class="cipher-square">
+                        <output class="cipher-output-square">A</output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
                 </div>
-                <div class="cipher-square">
-                    <output class="cipher-output-square">F</output>
+                <div class="row">
+                    <div class="cipher-square">
+                        <output class="cipher-output-square">D</output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
                 </div>
-                <div class="cipher-square">
-                    <output class="cipher-output-square">G</output>
+                <div class="row">
+                    <div class="cipher-square">
+                        <output class="cipher-output-square">F</output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
                 </div>
-                <div class="cipher-square">
-                    <output class="cipher-output-square">X</output>
+                <div class="row">
+                    <div class="cipher-square">
+                        <output class="cipher-output-square">G</output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cipher-square">
+                        <output class="cipher-output-square">X</output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
+                    <div class="square">
+                        <output class="output-square"></output>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="cipher-square">
-                    <output class="cipher-output-square">A</output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-            </div>
-            <div class="row">
-                <div class="cipher-square">
-                    <output class="cipher-output-square">D</output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-            </div>
-            <div class="row">
-                <div class="cipher-square">
-                    <output class="cipher-output-square">F</output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-            </div>
-            <div class="row">
-                <div class="cipher-square">
-                    <output class="cipher-output-square">G</output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-            </div>
-            <div class="row">
-                <div class="cipher-square">
-                    <output class="cipher-output-square">X</output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
-                <div class="square">
-                    <output class="output-square"></output>
-                </div>
+            <div id="key-table">
             </div>
         </div>
     </div>
