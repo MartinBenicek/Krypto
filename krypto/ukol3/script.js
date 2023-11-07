@@ -28,10 +28,12 @@ function createAlphabet(letter){
     
 }
 createAlphabet("W");
-let missingchar;
+let missingchar = "W";
 let versionchoice = false;
 let matrixGrid = 5;
 let cipher = ["A", "D", "F", "G", "X"];
+let holdchar;
+holdchar = "W";
 
 const buttons = document.getElementsByClassName("language");
 const version = document.getElementsByClassName("version");
@@ -43,12 +45,14 @@ buttons[0].addEventListener("click", () =>{
     delete czech_alphabet["J"];
     missingchar = "W";
     }
+    holdchar = "W";
     buttons[1].style.backgroundColor = "rgb(" + 255 + ", " + 255 + ", " + 255 + ")";
     buttons[0].style.backgroundColor = "rgb(" + 53 + ", " + 244 + ", " + 53 + ")";
     buttons[0].style.borderTopLeftRadius = "6px";
     buttons[0].style.borderBottomLeftRadius = "6px";
     buttons[1].style.borderTopRightRadius = "6px";
     buttons[1].style.borderBottomRightRadius = "6px";
+    console.log(alphabet);
 })
 
 buttons[1].addEventListener("click", () =>{
@@ -58,6 +62,8 @@ buttons[1].addEventListener("click", () =>{
         delete czech_alphabet["W"];
         missingchar = "J";
     }
+    holdchar = "J";
+    console.log(alphabet);
     buttons[0].style.backgroundColor = "rgb(" + 255 + ", " + 255 + ", " + 255 + ")";
     buttons[1].style.backgroundColor = "rgb(" + 53 + ", " + 244 + ", " + 53 + ")";
     buttons[0].style.borderTopLeftRadius = "6px";
@@ -199,7 +205,16 @@ version[0].addEventListener("click", () =>{
         const letter = String.fromCharCode(65 + i);
         alphabet[i] = letter;
     }
+    alphabet.splice(alphabet.indexOf(holdchar), 1);
+    if(holdchar === "W"){
+        czech_alphabet["W"] = "V";
+        delete czech_alphabet["J"];
+    } else if (holdchar === "J"){
+        czech_alphabet["J"] = "I";
+        delete czech_alphabet["W"];
+    }
     matrixGrid = 5;
+    console.log(alphabet);
 })
 
 version[1].addEventListener("click", () =>{
@@ -384,6 +399,7 @@ version[1].addEventListener("click", () =>{
     version[0].style.borderBottomLeftRadius = "6px";
     version[1].style.borderTopRightRadius = "6px";
     version[1].style.borderBottomRightRadius = "6px";
+    console.log(alphabet);
 })
 
 function filtration(text){
@@ -573,15 +589,17 @@ function encrypt(){
     const printfilteredText = document.getElementById("filtered-text");
     let key = "";
     let matrix = fillMatrix(key, missingchar);
+    let filteredKey = filtration(textAsKey);
+    console.log(filteredKey);
     let filteredText = filtration(textToEncrypt);
     printfilteredText.value = filteredText;
     let getPairedLetters = pairLetters(filteredText, matrix);
-    let keyMatrix = fillTableKey(getPairedLetters, textAsKey);
+    let keyMatrix = fillTableKey(getPairedLetters, filteredKey);
     mainMatrix = keyMatrix;
     let finalEncryption = sortMatrix(keyMatrix);
     printEncryptedText.value = finalEncryption;
     textToDecrypt.value = finalEncryption;
-    decKey.value = textAsKey;
+    decKey.value = filteredKey;
 }
 
 function getLetters(text, key){

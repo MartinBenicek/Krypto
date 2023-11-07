@@ -105,6 +105,7 @@ body{
 .input, .output{
     display: flex;
     align-items: center;
+    overflow-wrap: break-word;
 }
 
 .matrix-span{
@@ -161,8 +162,9 @@ body{
     border-radius: 5px;
 }
 
-#encrypted-text, #decrypted-text{
+#encrypted-text, #decrypted-text, #filtered-text{
     margin-left: 10px;
+    max-width: 600px;
 }
 
 #tables{
