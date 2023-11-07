@@ -194,12 +194,10 @@ version[0].addEventListener("click", () =>{
     version[1].style.borderBottomRightRadius = "6px";
     versionchoice = false;
     cipher = ["A", "D", "F", "G", "X"];
-    for(let i = 0; i < alphabet.length; i++){
-        for(let j = 0; j < 10; j++){
-            if(alphabet[i] === j){
-                alphabet.splice(i, 1);
-            }
-        }
+    alphabet = [];
+    for (let i = 0; i < 26; i++) {
+        const letter = String.fromCharCode(65 + i);
+        alphabet[i] = letter;
     }
     matrixGrid = 5;
 })
@@ -365,15 +363,16 @@ version[1].addEventListener("click", () =>{
     </div>
 </div>
 </div>`;
-    for (let i = 0; i < 26; i++) {
-        const letter = String.fromCharCode(65 + i);
-        alphabet[i] = letter;
-    }
     delete czech_alphabet["J"];
     delete czech_alphabet["W"];
     if(versionchoice == false){
+        alphabet = [];
+        for (let i = 0; i < 26; i++) {
+            const letter = String.fromCharCode(65 + i);
+            alphabet[i] = letter;
+        }
         for (let index = 0; index < 10; index++) {
-            alphabet.push(index);
+            alphabet.push(index.toString());
         }
         versionchoice = true;
     }
@@ -393,7 +392,7 @@ function filtration(text){
         let character = filteredText[i];
         if (filteredText[i] === "A" || filteredText[i] === "Z") {
             continue
-        } else if(alphabet.includes(filteredText[i]) === true){
+        } else if(alphabet.includes(filteredText[i])){
             continue;
         } else if(czech_alphabet[character]){
             filteredText[i] = czech_alphabet[character];
@@ -404,35 +403,7 @@ function filtration(text){
     filteredText = filteredText.join("").replace(/ /g,'');
     return filteredText;
 }
-
-const matrixCheckbox = document.getElementsByClassName("matrix-checkbox");
-const matrixCheckboxChoice = document.getElementsByClassName("matrix-key");
 let mainMatrix;
-
-matrixCheckbox[0].addEventListener("click", () =>{
-    matrixCheckbox[1].checked = false;
-    matrixCheckbox[0].checked = true;
-    matrixCheckboxChoice[0].disabled = true;
-})
-matrixCheckbox[1].addEventListener("click", () =>{
-    matrixCheckbox[0].checked = false;
-    matrixCheckbox[1].checked = true;
-    matrixCheckboxChoice[0].disabled = false;
-})
-
-function getMatrixChoice(choice){
-    let getNumber;
-    for (let i = 0; i < matrixCheckbox.length; i++){
-        if (choice === 1){
-            i += 2;
-        }
-        if (matrixCheckbox[i].checked === true){
-            getNumber = i;
-            break
-        }
-    }
-    return getNumber;
-}
 
 function shuffleAlphabet(array) {
     array.sort(() => Math.random() - 0.5);
@@ -441,26 +412,32 @@ function shuffleAlphabet(array) {
 
 function fillMatrix(text, letter){
     let deleteLetter = text.split("");
+    console.log(deleteLetter);
     const outputSquares = document.getElementsByClassName("output-square");
     let counter = 0;
     for (let i = 0; i < deleteLetter.length; i++){
         outputSquares[i].value = deleteLetter[i];
         alphabet.splice(alphabet.indexOf(deleteLetter[i]), 1);
         counter += 1;
+        console.log(alphabet);
     }
     if(versionchoice == false){
         createAlphabet(letter);
     } else{
+        alphabet = [];
         for (let i = 0; i < 26; i++) {
             const letter = String.fromCharCode(65 + i);
             alphabet[i] = letter;
+        }
+        for (let index = 0; index < 10; index++) {
+            alphabet.push(index.toString());
         }
     }
     let shuffledAlphabet = shuffleAlphabet(alphabet);
     for(let i = 0; i < alphabet.length; i++){
         outputSquares[i + counter].value = shuffledAlphabet[i];
     }
-    let matrix = listToMatrix(outputSquares, matrixGrid)
+    let matrix = listToMatrix(outputSquares, matrixGrid);
     return matrix;
 }
 
@@ -468,7 +445,7 @@ function findIndexInMatrix(letter, matrix){
     let position = [];
     for(let i = 0; i < matrix.length; i++){
         for(let j = 0; j < matrix.length; j++){
-            if(letter === matrix[i][j]){
+            if(letter == matrix[i][j]){
                 position = [i, j];
             }
         }
@@ -594,11 +571,7 @@ function encrypt(){
     const printEncryptedText = document.getElementById("encrypted-text");
     const textToDecrypt = document.getElementById("text-to-decrypt");
     const printfilteredText = document.getElementById("filtered-text");
-    const matrixChoice = getMatrixChoice();
     let key = "";
-    if(matrixChoice === 1){
-        key = matrixCheckboxChoice[0].value.toUpperCase();
-    }
     let matrix = fillMatrix(key, missingchar);
     let filteredText = filtration(textToEncrypt);
     printfilteredText.value = filteredText;
@@ -658,11 +631,7 @@ function decrypt(){
     const textToDecrypt = document.getElementById("text-to-decrypt").value.toUpperCase();
     const textAsKey = document.getElementById("decryption-key").value.toUpperCase();
     const printDecryptedText = document.getElementById("decrypted-text");
-    const matrixChoice = getMatrixChoice();
     let key = "";
-    if(matrixChoice === 1){
-        key = matrixCheckboxChoice[1].value.toUpperCase();
-    }
     let decLetters = getLetters(textToDecrypt, textAsKey);
     let finalDecryption = decText(decLetters);
     printDecryptedText.value = finalDecryption;
