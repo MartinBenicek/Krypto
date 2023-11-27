@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kryptologie 4</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="header">
+        <h1>RSA šifra</h1>
+        <h3>Martin Beníček</h3>
+    </div>
+    <div id="main">
+        <div id="tables">
+            <div id="encrypt-part">
+                <h3 class="bold">Zašifrovat text</h3>
+                <div class="input">
+                    <p>Zadejte text na zašifrování</p>
+                    <input type="text" id="text-to-encrypt">
+                </div>
+                <div class="output">
+                    <p>Číselná reprezentace textu<p>
+                    <output class="text-number integer-output"></output>
+                </div>
+                <div class="output">
+                    <p>Zašifrovaný text<p>
+                    <output id="encrypted-text"></output>
+                </div>
+                <div class="output style-button">
+                    <button id="encrypt-button" onclick="encrypt()">Zašifrovat</button>
+                </div>
+            </div>
+            <div id="number-part">
+                <h3 class="bold center">Vygenerování klíčů</h3>
+                <div class="output-gen">
+                    <p>p:</p>
+                    <input type="number" class="key-gen" id="p-key">
+                </div>
+                <div class="output-gen">
+                    <p>q:</p>
+                    <input type="number" class="key-gen" id="q-key">
+                </div>
+                <div class="output-gen">
+                    <p>n:</p>
+                    <input type="number" class="key-gen" id="n-key">
+                </div>
+                <div class="output-gen">
+                    <p>e:</p>
+                    <input type="number" class="key-gen" id="e-key">
+                </div>
+                <div class="output-gen">
+                    <p>Φ(n):</p>
+                    <input type="number" class="key-gen" id="fin-key">
+                </div>
+                <div class="output-gen">
+                    <p>d:</p>
+                    <input type="number" class="key-gen" id="d-key">
+                </div>
+                <div class="output-gen style-button margin-top">
+                    <button id="generate-key" onclick="generateKeys()">Generovat</button>
+                </div>
+            </div>
+            <div id="decrypt-part">
+                <h3 class="bold">Dešifrovat text</h3>
+                <div class="input">
+                    <p>Zadejte text na dešifrování</p>
+                    <input type="text" id="text-to-decrypt">
+                </div>
+                <div class="output">
+                    <p>Číselná reprezentace textu<p>
+                    <output class="text-number integer-output"></output>
+                </div>
+                <div class="output">
+                    <p>Dešifrovaný text<p>
+                    <output id="decrypted-text"></output>
+                </div>
+                <div class="output style-button">
+                    <button id="decrypt-button" onclick="decrypt()">Dešifrovat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

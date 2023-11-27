@@ -1,0 +1,120 @@
+body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Karla';
+    font-size: 18px;
+    background: linear-gradient(270deg, rgba(171,98,221,1) 0%, rgba(255,44,44,1) 50%, rgba(245,173,73,1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#header, .center{
+    text-align: center;
+}
+
+#header h1, #header h3{
+    margin: 10px;
+}
+
+#main{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#tables{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#encrypt-part, #decrypt-part, #number-part{
+    display: flex;
+    margin: 30px;
+    background: rgba(255, 255, 255, 0.575);
+    border-radius: 8px;
+    padding: 25px;
+    flex-direction: column;
+}
+
+#number-part{
+    width: 200px!important;
+}
+
+.input, .output{
+    display: flex;
+    flex-direction: column;
+}
+
+.output p{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#text-to-encrypt, #text-to-decrypt{
+    height: 30px;
+    width: 505px;
+    font-family: 'Karla';
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.text-number, #encrypted-text, .key-gen, #decrypted-text{
+    display: inline-block;
+    overflow: auto;
+    width: 500px;
+    font-family: 'Karla';
+    font-size: 18px;
+    border-radius: 5px;
+    border: 2px black dashed;
+    background-color: white;
+    text-wrap: balance; 
+}
+
+#encrypted-text, .text-number, #decrypted-text{
+    height: 90px;
+    padding: 5px;
+}
+
+.key-gen{
+    height: 30px;
+    border: 2px black solid;
+}
+
+.output-gen{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.key-gen{
+    width: 120px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    display: none;
+    margin: 0;
+}
+
+#encrypt-button, #decrypt-button, #generate-key{
+    height: 40px;
+    width: 200px;
+    font-size: 18px;
+    border-radius: 30px;
+    font-family: 'Karla';
+}
+
+.margin-top{
+    margin-top: auto;
+}
+
+#encrypt-button:hover, #decrypt-button:hover, #generate-key:hover{
+    background: linear-gradient(270deg, rgba(171,98,221,1) 0%, rgb(255, 66, 66) 50%, rgba(245,173,73,1) 100%);;
+}
+
+.style-button{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
