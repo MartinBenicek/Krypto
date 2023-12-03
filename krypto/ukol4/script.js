@@ -67,27 +67,23 @@ function gcd(a, b){
   return a;
 }
 
+function extendedGCD(a, b) {
+  if (b === BigInt(0)) {
+    return { gcd: a, x: BigInt(1), y: BigInt(0) };
+  } else {
+    const { gcd, x, y } = extendedGCD(b, a % b);
+    return { gcd, x: y, y: x - (a / b) * y };
+  }
+}
+
 function modInverse(a, m) {
-  let m0 = m;
-  let x0 = 0n;
-  let x1 = 1n;
+  const { gcd, x, y } = extendedGCD(a, m);
 
-  if (m === 1n) return 0n;
-
-  while (a > 1n) {
-      let q = a / m;
-      let t = m;
-
-      m = a % m;
-      a = t;
-      t = x0;
-      x0 = x1 - q * x0;
-      x1 = t;
+  if (gcd !== BigInt(1)) {
+    throw new Error('Inverse does not exist');
   }
 
-  if (x1 < 0n) x1 += m0;
-
-  return x1;
+  return (x % m + m) % m;
 }
 
 function generateKeys(){
@@ -97,8 +93,8 @@ function generateKeys(){
   const finKey = document.getElementById("fin-key");
   const eKey = document.getElementById("e-key");
   const dKey = document.getElementById("d-key");
-  const lowNumber = 10**9 - 1;
-  const highNumber = 10**10 - 1;
+  const lowNumber = (10**9);
+  const highNumber = (10**10) - 1;
   let e = 2n;
   for(let i = 0; i < 2; i++){
     let primeNumber = Math.floor(Math.random() * (highNumber - lowNumber + 1)) + lowNumber;
@@ -115,18 +111,24 @@ function generateKeys(){
   nKey.value = n;
   let fiN = BigInt(BigInt(pKey.value) - BigInt(1)) * BigInt(BigInt(qKey.value) - BigInt(1));
   finKey.value = fiN;
-  let range = fiN - BigInt(2);
-  while (!(BigInt(1) < e < fiN && gcd(fiN, BigInt(e)) === 1n)){
+  let range = (fiN-1n) - BigInt(2);
+  while (true) {
     e = BigInt(Math.floor(Math.random() * Number(range)) + 2);
     while (isPrime(e) !== true){
-      e = BigInt(Math.floor(Math.random() * Number(range)) + 2);
+        e = BigInt(Math.floor(Math.random() * Number(range)) + 2);
+    }
+    let number = bigInt.gcd(e, fiN);
+    if (bigInt(number) == 1n) {
+        break;
     }
   }
   eKey.value = e;
   let d = modInverse(e, fiN);
+  d = BigInt(d);
   dKey.value = d;
 }
 
+let lastNumber = [];
 function toBinary(array){
   const integerOutput = document.getElementsByClassName("integer-output");
   let newArray = [];
@@ -134,11 +136,15 @@ function toBinary(array){
     array[i] = array[i].toString(2);
     array[i] = padTo8Bits(array[i]);
   }
+  console.log(array);
   for (let i = 0; i < array.length; i += 8) {
     const group = array.slice(i, i + 8);
     newArray.push(group.join(''));
+    lastNumber.push(group.join(''));
   }
+  console.log(newArray);
   for (let i = 0; i < newArray.length; i ++){
+    newArray[i] = BigInt(newArray[i]);
     newArray[i] = BigInt(parseInt(newArray[i], 2));
   }
   integerOutput[0].value = newArray.join(" ");
@@ -147,7 +153,8 @@ function toBinary(array){
 
 function padTo8Bits(binaryString) {
   if (binaryString.length < 8) {
-      return binaryString.padStart(8, '0');
+    console.log(binaryString);
+    return binaryString.padStart(8, '0');
   }
   return binaryString;
 }
@@ -157,66 +164,42 @@ function asciiDecimal(text){
   for (let i = 0; i < text.length; i++){
     newArray.push(text.charCodeAt(i));
   }
+  console.log(newArray);
   let bigArray = toBinary(newArray);
   return bigArray;
 }
+console.log("š".charCodeAt(0));
+function modPow(base, exponent, modulus) {
+    if (modulus === 1n) return 0n;
 
-function addmod(x, y, n)
-{
-    // Precondition: x<n, y<n
-    // If it will overflow, use alternative calculation
-    if (x + y <= x) x = x - (n - y) % n;
-    else x = (x + y) % n;
-    return x;
-}
+    let result = 1n;
+    base = base % modulus;
 
-function sqrmod(a, n)
-{
-    var b;
-    var sum = 0n;
-
-    // Make sure original number is less than n
-    a = a % n;
-
-    // Use double and add algorithm to calculate a*a mod n
-    for (b = a; b != 0n; b >>= 1n) {
-        if (b & 1n) {
-            sum = addmod(sum, a, n);
+    while (exponent > 0n) {
+        if (exponent % 2n === 1n) {
+            result = (result * base) % modulus;
         }
-        a = addmod(a, a, n);
-    }
-    return sum;
-}
 
-function powFun(base, ex, mo) {
-    var r;
-    if(ex === 0n) 
-        return 1n;
-    else if(ex % 2n === 0n) {
-        r = powFun(base, ex/2n, mo) % mo ;
-        // return (r * r) % mo;
-        return sqrmod(r, mo);
-    }else 
-        return (base * powFun(base, ex - 1n, mo)) % mo;
+        exponent = exponent >> 1n;
+        base = (base * base) % modulus;
+    }
+
+    return result;
 }
 
 function encrypt(){
   const textToEncrypt = document.getElementById("text-to-encrypt").value;
   const printEncryptedText = document.getElementById("encrypted-text");
   const textToDecrypt = document.getElementById("text-to-decrypt");
-  const nKey = document.getElementById("n-key");
-  const eKey = document.getElementById("e-key");
+  const nKey = document.getElementById("n-key").value;
+  const eKey = document.getElementById("e-key").value;
+  lastNumber = [];
   let mKey = asciiDecimal(textToEncrypt);
   let encryptedText, encryptedArray = [];
-  /*
-  if (nKey.value === ""){
-    console.log("a");
-  }
-  */
-  let nKeyValue = BigInt(parseInt(nKey.value, 10));
-  let eKeyValue = BigInt(parseInt(eKey.value, 10));
+  let nKeyValue = BigInt(nKey);
+  let eKeyValue = BigInt(eKey);
   for(let i = 0; i < mKey.length; i ++){
-    encryptedText = powFun(mKey[i], eKeyValue, nKeyValue);
+    encryptedText = modPow(mKey[i], eKeyValue, nKeyValue)
     encryptedArray.push(encryptedText);
   }
   printEncryptedText.value = encryptedArray.join(" ");
@@ -231,23 +214,54 @@ function getArray(text){
   return text;
 }
 
+function toDecimal(array){
+  let newArray = [];
+  for (let i = 0; i < array.length; i++) {
+      array[i] = array[i].toString(2);
+      array[i] = "0" + array[i];
+      if(array[i] !== lastNumber[i]){
+        array[i] = lastNumber[i];
+      }
+  }
+  console.log(array);
+  for (let i = 0; i < array.length; i++) {
+    for (let j = 0; j < array[i].length; j += 8 ){
+      console.log(array[i].length);
+      newArray.push(array[i].slice(j, j + 8));
+    }
+  }
+  console.log(newArray);
+  return newArray;
+}
+
+function backToText(array){
+  for (let i = 0; i < array.length; i++){
+    array[i] = parseInt(array[i], 2);
+  }
+  console.log(array);
+  for (let i = 0; i < array.length; i++){
+    array[i] = String.fromCharCode(array[i]);
+  }
+  array = array.join("");
+  return array;
+}
+
 function decrypt(){
   const textToDecrypt = document.getElementById("text-to-decrypt").value;
   const printDecryptedText = document.getElementById("decrypted-text");
   const integerOutput = document.getElementsByClassName("integer-output");
-  const nKey = document.getElementById("n-key");
-  const eKey = document.getElementById("e-key");
-  const dKey = document.getElementById("d-key");
+  const nKey = document.getElementById("n-key").value;
+  const dKey = document.getElementById("d-key").value;
   let backToNumbers, decryptedArray = [];
-  let nKeyValue = BigInt(parseInt(nKey.value, 10));
-  let eKeyValue = BigInt(parseInt(eKey.value, 10));
-  let dKeyValue = BigInt(parseInt(dKey.value, 10));
+  let nKeyValue = BigInt(nKey);
+  let dKeyValue = BigInt(dKey);
   let getArrays = getArray(textToDecrypt);
-  console.log(getArrays);
   for(let i = 0; i < getArrays.length; i++){
-    backToNumbers = powFun(getArrays[i], dKeyValue, nKeyValue);
-    console.log(backToNumbers);
+    backToNumbers = modPow(getArrays[i], dKeyValue, nKeyValue);
     decryptedArray.push(backToNumbers);
   }
-  integerOutput[1].value = decryptedArray;
+  integerOutput[1].value = decryptedArray.join(" ");
+  let decodedBinary = toDecimal(decryptedArray);
+  let finalDecryption = backToText(decodedBinary);
+  printDecryptedText.value = finalDecryption;
 }
