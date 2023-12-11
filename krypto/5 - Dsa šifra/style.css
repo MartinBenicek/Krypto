@@ -30,11 +30,11 @@ body{
     border-radius: 8px;
     padding: 15px;
     margin: 30px;
-    width: 700px;
+    width: 800px;
     height: fit-content;
 }
 
-#file, #signature, #choose-signature{
+#fileInput, #choose-signature{
     display: none;
 }
 
@@ -44,8 +44,8 @@ body{
     align-items: center;
     cursor: pointer;
     background: white;
-    height: 40px;
-    width: 200px;
+    height: 36px;
+    width: 196px;
     font-size: 18px;
     border-radius: 30px;
     font-family: 'Karla';
@@ -53,6 +53,85 @@ body{
     margin: 10px;
 }
 
-.choose-file-style:hover{
+.choose-file-style:hover, #generate-key:hover, #signature:hover, #verify:hover{
     background: linear-gradient(270deg, rgba(171,98,221,1) 0%, rgb(255, 66, 66) 50%, rgba(245,173,73,1) 100%);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    display: none;
+    margin: 0;
+}
+
+.key-gen{
+    height: 30px;
+    border: 2px black solid;
+    font-family: 'Karla';
+    display: inline-block;
+    overflow: auto;
+    font-size: 18px;
+    border-radius: 5px;
+    background-color: white;
+    text-wrap: balance; 
+}
+
+.output-gen{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.output-gen p{
+    margin-right: 5px;
+}
+
+#number-part{
+    display: flex;
+    flex-direction: column;
+}
+
+#e, #d, #ziphold{
+    display: none;
+}
+
+#generate-key, #signature, #verify{
+    height: 40px;
+    width: 200px;
+    font-size: 18px;
+    border-radius: 30px;
+    font-family: 'Karla';
+    cursor: pointer;
+}
+
+.style-button{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.margin-top{
+    margin-top: 25px;
+}
+
+#file-part{
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#file-name-display, #file-type-display{
+    margin-left: 5px;
+}
+
+#images{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#approved, #denied{
+    height: 200px;
+    width: 200px;
+    display: none;
 }

@@ -136,13 +136,11 @@ function toBinary(array){
     array[i] = array[i].toString(2);
     array[i] = padTo8Bits(array[i]);
   }
-  console.log(array);
   for (let i = 0; i < array.length; i += 8) {
     const group = array.slice(i, i + 8);
     newArray.push(group.join(''));
     lastNumber.push(group.join(''));
   }
-  console.log(newArray);
   for (let i = 0; i < newArray.length; i ++){
     newArray[i] = BigInt(newArray[i]);
     newArray[i] = BigInt(parseInt(newArray[i], 2));
@@ -153,7 +151,6 @@ function toBinary(array){
 
 function padTo8Bits(binaryString) {
   if (binaryString.length < 8) {
-    console.log(binaryString);
     return binaryString.padStart(8, '0');
   }
   return binaryString;
@@ -164,11 +161,9 @@ function asciiDecimal(text){
   for (let i = 0; i < text.length; i++){
     newArray.push(text.charCodeAt(i));
   }
-  console.log(newArray);
   let bigArray = toBinary(newArray);
   return bigArray;
 }
-console.log("š".charCodeAt(0));
 function modPow(base, exponent, modulus) {
     if (modulus === 1n) return 0n;
 
@@ -223,14 +218,11 @@ function toDecimal(array){
         array[i] = lastNumber[i];
       }
   }
-  console.log(array);
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array[i].length; j += 8 ){
-      console.log(array[i].length);
       newArray.push(array[i].slice(j, j + 8));
     }
   }
-  console.log(newArray);
   return newArray;
 }
 
@@ -238,7 +230,6 @@ function backToText(array){
   for (let i = 0; i < array.length; i++){
     array[i] = parseInt(array[i], 2);
   }
-  console.log(array);
   for (let i = 0; i < array.length; i++){
     array[i] = String.fromCharCode(array[i]);
   }
