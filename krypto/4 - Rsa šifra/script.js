@@ -211,7 +211,9 @@ function toDecimal(array){
   let newArray = [];
   for (let i = 0; i < array.length; i++) {
       array[i] = array[i].toString(2);
-      array[i] = "0" + array[i];
+      while (array[i].length % 8 !== 0){
+        array[i] = "0" + array[i];
+      }
   }
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array[i].length; j += 8 ){

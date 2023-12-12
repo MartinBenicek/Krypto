@@ -126,16 +126,14 @@ function generateKeys(){
   saveAs(publicKeyBlob, "Veřejný.pub.txt");
 }
 
-let lastNumber = [];
 function toBinary(array){
   let newArray = [];
   for (let i = 0; i < array.length; i++){
     array[i] = array[i].toString(2);
     array[i] = padTo8Bits(array[i]);
-    lastNumber.push(array[i]);
   }
-  for (let i = 0; i < array.length; i += 8) {
-    const group = array.slice(i, i + 8);
+  for (let i = 0; i < array.length; i += 6) {
+    const group = array.slice(i, i + 6);
     newArray.push(group.join(''));
   }
   for (let i = 0; i < newArray.length; i ++){
@@ -154,7 +152,6 @@ function padTo8Bits(binaryString) {
 
 function asciiDecimal(text){
   let newArray = [];
-  lastNumber = [];
   for (let i = 0; i < text.length; i++){
     newArray.push(text.charCodeAt(i));
   }
@@ -186,11 +183,14 @@ function encrypt(text){
   let encryptedText, encryptedArray = [];
   let nKeyValue = BigInt(nKey);
   let dKeyValue = BigInt(dKey);
+  dKeyValue = 22185934771626159365n
+  nKeyValue = 45839540926572668711n
   for(let i = 0; i < mKey.length; i ++){
     encryptedText = modPow(mKey[i], dKeyValue, nKeyValue)
     encryptedArray.push(encryptedText);
   }
   let encryptedTextToReturn = encryptedArray.join(" ");
+  console.log(encryptedTextToReturn);
   return encryptedTextToReturn;
 }
 
@@ -204,7 +204,12 @@ function getArray(text){
 
 function toDecimal(array){
   let newArray = [];
-  array = lastNumber;
+  for (let i = 0; i < array.length; i++) {
+    array[i] = array[i].toString(2);
+    while (array[i].length % 8 !== 0){
+      array[i] = "0" + array[i];
+    }
+}
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array[i].length; j += 8 ){
       newArray.push(array[i].slice(j, j + 8));
@@ -285,6 +290,7 @@ function zipCreate(){
     fr.onload = function (event) {
       let message = event.target.result;
       let HashedMessage = keccak512(message);
+      console.log(HashedMessage);
       encryptedHash = "RSA_SHA3-512 PODPIS_V_BASE64 " + encrypt(HashedMessage);
   
       let file = files[0];
@@ -358,3 +364,4 @@ function verify(){
     denied.style.display = "block";
   }
 }
+// spravit četní souborů a je to ok
