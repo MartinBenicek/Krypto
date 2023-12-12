@@ -128,7 +128,6 @@ function generateKeys(){
   dKey.value = d;
 }
 
-let lastNumber = [];
 function toBinary(array){
   const integerOutput = document.getElementsByClassName("integer-output");
   let newArray = [];
@@ -136,16 +135,16 @@ function toBinary(array){
     array[i] = array[i].toString(2);
     array[i] = padTo8Bits(array[i]);
   }
-  for (let i = 0; i < array.length; i += 8) {
-    const group = array.slice(i, i + 8);
+  for (let i = 0; i < array.length; i += 6) {
+    const group = array.slice(i, i + 6);
     newArray.push(group.join(''));
-    lastNumber.push(group.join(''));
   }
   for (let i = 0; i < newArray.length; i ++){
     newArray[i] = BigInt(newArray[i]);
     newArray[i] = BigInt(parseInt(newArray[i], 2));
   }
   integerOutput[0].value = newArray.join(" ");
+  
   return newArray;
 }
 
@@ -188,7 +187,6 @@ function encrypt(){
   const textToDecrypt = document.getElementById("text-to-decrypt");
   const nKey = document.getElementById("n-key").value;
   const eKey = document.getElementById("e-key").value;
-  lastNumber = [];
   let mKey = asciiDecimal(textToEncrypt);
   let encryptedText, encryptedArray = [];
   let nKeyValue = BigInt(nKey);
@@ -214,9 +212,6 @@ function toDecimal(array){
   for (let i = 0; i < array.length; i++) {
       array[i] = array[i].toString(2);
       array[i] = "0" + array[i];
-      if(array[i] !== lastNumber[i]){
-        array[i] = lastNumber[i];
-      }
   }
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array[i].length; j += 8 ){
