@@ -144,7 +144,7 @@ function toBinary(array){
 }
 
 function padTo8Bits(binaryString) {
-  if (binaryString.length < 8) {
+  while (binaryString.length < 8) {
     return binaryString.padStart(8, '0');
   }
   return binaryString;
@@ -183,14 +183,11 @@ function encrypt(text){
   let encryptedText, encryptedArray = [];
   let nKeyValue = BigInt(nKey);
   let dKeyValue = BigInt(dKey);
-  dKeyValue = 22185934771626159365n
-  nKeyValue = 45839540926572668711n
   for(let i = 0; i < mKey.length; i ++){
     encryptedText = modPow(mKey[i], dKeyValue, nKeyValue)
     encryptedArray.push(encryptedText);
   }
   let encryptedTextToReturn = encryptedArray.join(" ");
-  console.log(encryptedTextToReturn);
   return encryptedTextToReturn;
 }
 
@@ -245,6 +242,7 @@ function decrypt(text, eKey, nKey){
 }
 
 const fileInputGlobal = document.getElementById("fileInput");
+const chooseSignature = document.getElementById("choose-signature");
 let fileGlobal;
 
 fileInputGlobal.addEventListener("change", function() {
@@ -290,7 +288,6 @@ function zipCreate(){
     fr.onload = function (event) {
       let message = event.target.result;
       let HashedMessage = keccak512(message);
-      console.log(HashedMessage);
       encryptedHash = "RSA_SHA3-512 PODPIS_V_BASE64 " + encrypt(HashedMessage);
   
       let file = files[0];
@@ -307,55 +304,79 @@ function zipCreate(){
   fr.readAsBinaryString(files[0]);
 }
 
-function loadFiles(){
-  const fileInput = document.getElementById('choose-signature');
+chooseSignature.addEventListener("change", function(){
   const eInput = document.getElementById("e");
+  const nInput = document.getElementById("n");
   const dInput = document.getElementById("d");
-  const zInput = document.getElementById("ziphold");
-  const files = fileInput.files;
-  for(let i = 0; i < files.length; i++){
-    let file = files[i];
-    let reader = new FileReader();
-    reader.onload = function () {
-      if(file.name == "Veřejný.pub.txt"){
-        eInput.value = reader.result;
-      } else if(file.name == "Soukromý.pri.txt"){
-        dInput.value = reader.result;
-      } else if(file.name == "files.zip"){
-        zInput.value = reader.result;
-      }
+  const zEncryptInput = document.getElementById("zip-encrypt");
+  const zPlainInput = document.getElementById("zip-plain");
+  let newZipArray = [], newTxtArray = [];
+  const files = chooseSignature.files;
+  for (let i = 0; i < files.length; i++) {
+    if (files[i].name.endsWith(".zip")) {
+      newZipArray.push(files[i]);
+    } else if (files[i].name.endsWith(".txt")) {
+      newTxtArray.push(files[i]);
     }
-    reader.readAsText(file);
   }
-}
+  newTxtArray.forEach(file => {
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+        const content = event.target.result;
+        const lines = content.split('\n');
+
+        lines.forEach(line => {
+            if (line.startsWith('n:')) {
+                nInput.value = line.split(': ')[1].trim();
+            } else if (line.startsWith('e:')) {
+                eInput.value = line.split(': ')[1].trim();
+            } else if (line.startsWith('d:')) {
+                dInput.value = line.split(': ')[1].trim();
+            }
+        });
+    };
+    reader.readAsText(file);
+  });
+
+  newZipArray.forEach(zipFile => {
+  const zip = new JSZip();
+  zip.loadAsync(zipFile).then(contents => {
+    contents.forEach((relativePath, file) => {
+      if (file.name.includes('.msg')) {
+        file.async('string').then(text => {
+          zPlainInput.value = text;
+        });
+      } else if (file.name.includes('.sign')) {
+        file.async('string').then(text => {
+          const line = text.trim();
+          const regex = /RSA_SHA3-512 PODPIS_V_BASE64\s*(.*)/;
+          const matches = line.match(regex);
+          if (matches && matches.length > 1) {
+            zEncryptInput.value = matches[1];
+          }
+        });
+      }
+    });
+  });
+});
+});
 
 function verify(){
   const eInput = document.getElementById("e");
+  const nInput = document.getElementById("n");
   const dInput = document.getElementById("d");
-  const zInput = document.getElementById("ziphold");
+  const zEncryptInput = document.getElementById("zip-encrypt");
+  const zPlainInput = document.getElementById("zip-plain");
   const approved = document.getElementById("approved");
   const denied = document.getElementById("denied");
-  let n, e, d;
-  const publicKeyString = eInput.value;
-  const privateKeyString = dInput.value;
-  const parts = publicKeyString.split('n:');
-  const parts2 = privateKeyString.split('d:');
-  const nPart = parts[1].split('e:');
-  n = nPart[0].trim();
-  e = nPart[1].trim(); 
-  d = parts2[1].trim(); 
-  const content = zInput.value;
-  const startMarker = 'PlainText.msg.txt';
-  const startMarker2 = 'EncryptedText.sign.txtRSA_SHA3-512 PODPIS_V_BASE64';
-  const startIndex = content.indexOf(startMarker);
-  const startIndex2 = content.indexOf(startMarker2);
-  const extractedText = content.substring(startIndex + startMarker.length);
-  const text = extractedText.split('PK')[0];
-  const extractedText2 = content.substring(startIndex2 + startMarker2.length);
-  let numbersArray = extractedText2.match(/\d+/g);
-  numbersArray = numbersArray.join(" ");
-  let decryptedHash = decrypt(numbersArray, e, n);
-  let textHash = keccak512(text);
+  let n = nInput.value;
+  let e = eInput.value;
+  let d = dInput.value;
+  let plainText = zPlainInput.value;
+  let numbers = zEncryptInput.value;
+  let decryptedHash = decrypt(numbers, e, n);
+  let textHash = keccak512(plainText);
   if (decryptedHash == textHash){
     approved.style.display = "block";
     denied.style.display = "none";
@@ -364,4 +385,3 @@ function verify(){
     denied.style.display = "block";
   }
 }
-// spravit četní souborů a je to ok

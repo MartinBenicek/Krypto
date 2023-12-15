@@ -42,7 +42,7 @@
                 <input type="file" id="fileInput">
                 <label for="fileInput" class="choose-file-style">Zvolit soubor</label>
                 <button id="signature" onclick="zipCreate()">Podepsat</button>
-                <input type="file" id="choose-signature" onclick="loadFiles()" multiple>
+                <input type="file" id="choose-signature" multiple>
                 <label for="choose-signature" class="choose-file-style">Nahrát</label>
                 <button id="verify" onclick="verify()">Ověřit</button>
             </div>
@@ -50,9 +50,11 @@
                 <p>Zvolený soubor je: <span id="file-name-display"></span></p>
                 <p>Koncovka je: <span id="file-type-display"></span></p>
             </div>
+            <input type="text" id="n">
             <input type="text" id="e">
             <input type="text" id="d">
-            <input type="text" id="ziphold">
+            <input type="text" id="zip-plain">
+            <input type="text" id="zip-encrypt">
             <div id="images">
                 <img id="approved" src="/krypto//5 - Dsa šifra/1000_F_92411934_BLqHbonJzcKY5kKDlNIlJ29Vdo0w7Nj8.jpg">
                 <img id="denied" src="/krypto//5 - Dsa šifra/denied-stamp-vector-16662472.jpg">

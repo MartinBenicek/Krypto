@@ -90,9 +90,10 @@ input::-webkit-inner-spin-button {
     flex-direction: column;
 }
 
-#e, #d, #ziphold{
+#n, #e, #d, #zip-plain, #zip-encrypt{
     display: none;
 }
+
 
 #generate-key, #signature, #verify{
     height: 40px;

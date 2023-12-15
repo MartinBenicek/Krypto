@@ -149,7 +149,7 @@ function toBinary(array){
 }
 
 function padTo8Bits(binaryString) {
-  if (binaryString.length < 8) {
+  while (binaryString.length < 8) {
     return binaryString.padStart(8, '0');
   }
   return binaryString;
